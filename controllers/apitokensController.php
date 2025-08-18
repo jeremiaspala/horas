@@ -14,7 +14,9 @@ class ApiTokensController
     public function Index()
     {
         $tokens = $this->model->Listar();
+        require_once 'views/layout/header.php';
         require_once 'views/apitokens/index.php';
+        require_once 'views/layout/footer.php';
     }
 
     // Form alta/edición
@@ -30,8 +32,9 @@ class ApiTokensController
         if (isset($_REQUEST['id']) && $_REQUEST['id'] > 0) {
             $token = $this->model->Obtener($_REQUEST['id']);
         }
-
+        require_once 'views/layout/header.php';
         require_once 'views/apitokens/editar.php';
+        require_once 'views/layout/footer.php';
     }
 
     // Guardar alta/edición

@@ -7,7 +7,7 @@ $identity = Utils::getIdentity();
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-        <title> Gestión de Horas </title>
+        <title> VPN Admin | Layer Zero </title>
         <link rel="icon" type="image/x-icon" href="<?= base_url ?>assets/img/favicon.ico"/>
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
@@ -72,7 +72,7 @@ $identity = Utils::getIdentity();
                 <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
 
                 <div class="nav-logo align-self-center">
-                    <a class="navbar-brand" href="<?= base_url ?>dashboard/index"><img alt="logo" src="<?= base_url ?>assets/img/logo.svg" style="display:none;"> <span class="navbar-brand-name">Gestión de Horas</span></a>
+                    <a class="navbar-brand" href="<?= base_url ?>dashboard/index"><img alt="logo" src="<?= base_url ?>assets/img/logo.svg"> <span class="navbar-brand-name">VPN Reporter</span></a>
                 </div>
 
                 <ul class="navbar-item flex-row mr-auto">
@@ -201,7 +201,7 @@ $identity = Utils::getIdentity();
                             </a>
                         </li>
                         <li class="nav-item theme-text">
-                            <a href="<?= base_url ?>dashboard/index" class="nav-link"> FX Sistemas </a>
+                            <a href="<?= base_url ?>dashboard/index" class="nav-link"> Layer Zero </a>
                         </li>
                     </ul>
 
@@ -210,16 +210,13 @@ $identity = Utils::getIdentity();
                             <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle autodroprown">
                                 <div class="">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                    <span>Personal</span>
+                                    <span>Dashboard</span>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </a>
                             <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
                                 <li>
-                                    <a href="<?= base_url ?>horas/mis"> Mis Horas </a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url ?>liquidacion/mis"> Mis liquidaciones </a>
+                                    <a href="<?= base_url ?>dashboard/index"> Dashboard VPN </a>
                                 </li>
                             </ul>
                         </li>
@@ -228,39 +225,30 @@ $identity = Utils::getIdentity();
                                 <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle autodroprown">
                                     <div class="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                                        <span>Horas y Equipos</span>
+                                        <span>Gestion VPN</span>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                 </a>
                                 <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
                                     <li>
-                                        <a href="<?= base_url ?>personas/index"> Personas </a>
+                                        <a href="<?= base_url ?>apitokens/index"> Tokens y Dispositivos </a>
                                     </li>
                                     <li>
-                                        <a href="<?= base_url ?>trabajo/index"> Equipos de trabajo </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?= base_url ?>empresas/index"> Empresas </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?= base_url ?>proyectos/index"> Proyectos </a>
-                                    </li>
+                                        <a href="<?= base_url ?>vpn/index"> Conexiones e Informes </a>
+                                    </li>                                    
                                 </ul>
                             </li>
                             <li class="menu single-menu">
                                 <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle autodroprown">
                                     <div class="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                                        <span>Liquidaciones</span>
+                                        <span>Configuración</span>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                 </a>
                                 <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
                                     <li>
-                                        <a href="<?= base_url ?>liquidacion/invoice"> Liquidaciones </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?= base_url ?>liquidacion/nuevo"> Liquidación Pagos </a>
+                                        <a href="<?= base_url ?>configuracion/index"> Empresa y logo </a>
                                     </li>
                                 </ul>
                             </li>

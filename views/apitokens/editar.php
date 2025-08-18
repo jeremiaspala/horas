@@ -1,37 +1,69 @@
-<?php @include 'views/layouts/header.php'; ?>
-<div class="container mt-4">
-  <h3><?= $token->id ? 'Editar token' : 'Nuevo token' ?></h3>
-  <form method="post" action="index.php?c=ApiTokens&a=Guardar" class="mt-3">
-    <input type="hidden" name="id" value="<?= htmlspecialchars($token->id) ?>">
-    <div class="mb-3">
-      <label class="form-label">Nombre</label>
-      <input type="text" name="name" class="form-control" required value="<?= htmlspecialchars($token->name) ?>">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Token</label>
-      <div class="input-group">
-        <input type="text" name="token" id="token" class="form-control" value="<?= htmlspecialchars($token->token) ?>" placeholder="(vacío para autogenerar)">
-        <button class="btn btn-outline-secondary" type="button" id="btnGen">Generar</button>
+<div class="content-wrapper" data-page="api-tokens-crud">
+  <section class="content-header d-flex justify-content-between align-items-center">
+    <h1 class="page-title mb-0"><?= $token->id ? 'Editar token' : 'Nuevo token' ?></h1>
+    <ol class="breadcrumb mb-0">
+      <li><a href="<?=base_url?>"><i class="fa fa-home"></i> Inicio</a></li>
+      <li><a href="<?=base_url?>apitokens/index">API Tokens</a></li>
+      <li class="active"><?= $token->id ? 'Editar' : 'Nuevo' ?></li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title"><?= $token->id ? 'Editar' : 'Nuevo' ?></h3>
       </div>
-      <div class="form-text">Si lo dejás vacío al guardar, se autogenera.</div>
+      <div class="box-body">
+        <form method="post" action="<?=base_url?>apitokens/Guardar" autocomplete="off">
+          <input type="hidden" name="id" value="<?= (int)$token->id ?>">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="name" class="form-control" required value="<?= htmlspecialchars($token->name) ?>">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Token</label>
+                <div class="input-group">
+                  <input type="text" name="token" id="token" class="form-control" value="<?= htmlspecialchars($token->token) ?>" placeholder="(vacío para autogenerar)">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="btnGen"><i class="fa fa-bolt"></i> Generar</button>
+                  </span>
+                </div>
+                <p class="help-block">Si lo dejás vacío al guardar, se autogenera en el servidor.</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="enabled" value="1" <?= $token->enabled ? 'checked' : '' ?>> Habilitado
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="box-footer">
+            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Guardar</button>
+            <a class="btn btn-default" href="<?=base_url?>apitokens/index"><i class="fa fa-arrow-left"></i> Volver</a>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="form-check form-switch mb-3">
-      <input class="form-check-input" type="checkbox" name="enabled" value="1" id="enabled" <?= $token->enabled ? 'checked' : '' ?>>
-      <label class="form-check-label" for="enabled">Habilitado</label>
-    </div>
-    <div class="d-flex gap-2">
-      <button class="btn btn-primary" type="submit">Guardar</button>
-      <a class="btn btn-secondary" href="index.php?c=ApiTokens&a=Index">Cancelar</a>
-    </div>
-  </form>
+  </section>
 </div>
 <script>
-document.getElementById('btnGen').addEventListener('click', async () => {
-  // generador simple desde el navegador (no criptoseguro, solo para vista)
-  const array = new Uint8Array(32);
-  crypto.getRandomValues(array);
-  const hex = Array.from(array).map(b => b.toString(16).padStart(2,'0')).join('');
+document.getElementById('btnGen').addEventListener('click', function(){
+  if (!window.crypto || !window.crypto.getRandomValues) {
+    // fallback simple
+    document.getElementById('token').value = (Date.now().toString(16) + Math.random().toString(16).slice(2)).padEnd(64,'0').slice(0,64);
+    return;
+  }
+  const arr = new Uint8Array(32);
+  crypto.getRandomValues(arr);
+  const hex = Array.from(arr).map(b => b.toString(16).padStart(2,'0')).join('');
   document.getElementById('token').value = hex;
 });
 </script>
-<?php @include 'views/layouts/footer.php'; ?>
+
