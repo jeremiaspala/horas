@@ -1,0 +1,12 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^6.1",
+        "spatie/image": "^2.2",
+        "mercadopago/dx-php": "^2.4"
+    },
+    "config": {
+        "platform": {
+            "php": "7.2"
+        }
+    }
+}
