@@ -1,0 +1,3 @@
+2025-08-18T17:21:24+00:00 [::1] 422 missing field | {"field":"event_type"}
+2025-08-18T17:21:38+00:00 [192.168.122.248] 422 missing field | {"field":"service"}
+2025-08-18T17:21:41+00:00 [192.168.122.248] 422 missing field | {"field":"service"}
