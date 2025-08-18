@@ -25,6 +25,35 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `nerdadas_horas` /*!40100 DEFAULT CHARA
 USE `nerdadas_horas`;
 
 --
+-- Table structure for table `api_tokens`
+--
+
+DROP TABLE IF EXISTS `api_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `api_tokens` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `token` char(64) NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token` (`token`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `api_tokens`
+--
+
+LOCK TABLES `api_tokens` WRITE;
+/*!40000 ALTER TABLE `api_tokens` DISABLE KEYS */;
+INSERT INTO `api_tokens` VALUES
+(1,'R1Test','5b59457277535624eb3fef15b4ab9e717e61bc6649cc0cda30eecf9335c8b66c',1,'2025-08-18 15:10:03');
+/*!40000 ALTER TABLE `api_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categorias`
 --
 
@@ -159,7 +188,7 @@ CREATE TABLE `historia` (
   `fecha` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `historia_FK` (`usuario_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,7 +266,11 @@ INSERT INTO `historia` VALUES
 (66,1,'login','Email: jeremiaspalazzesi@gmail.com','::1','2025-08-18 11:03:46'),
 (67,1,'logout','','::1','2025-08-18 11:04:17'),
 (68,0,'fail','Email: jeremiaspalazzesi@gmail.com Password: josefo \n','::1','2025-08-18 11:04:26'),
-(69,1,'login','Email: jeremiaspalazzesi@gmail.com','::1','2025-08-18 11:04:30');
+(69,1,'login','Email: jeremiaspalazzesi@gmail.com','::1','2025-08-18 11:04:30'),
+(70,0,'fail','Email: jeremiaspalazzesi@gmail.com Password: josefo \n','::1','2025-08-18 14:26:49'),
+(71,0,'fail','Email: jeremiaspalazzesi@gmail.com Password: josefo \n','::1','2025-08-18 14:26:54'),
+(72,0,'fail','Email: jeremiaspalazzesi@gmail.com Password: josefo \n','::1','2025-08-18 14:26:56'),
+(73,1,'login','Email: jeremiaspalazzesi@gmail.com','::1','2025-08-18 14:27:00');
 /*!40000 ALTER TABLE `historia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -523,6 +556,7 @@ DROP TABLE IF EXISTS `vpn_events`;
 CREATE TABLE `vpn_events` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `event_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `connect_time` timestamp NULL DEFAULT NULL,
   `event_type` enum('up','down') NOT NULL,
   `user` varchar(128) NOT NULL,
   `service` varchar(32) NOT NULL,
@@ -534,8 +568,13 @@ CREATE TABLE `vpn_events` (
   `router_id` varchar(64) NOT NULL,
   `session_key` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_last_down` (`event_time`,`user`,`interface`,`event_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+  UNIQUE KEY `uniq_last_down` (`event_time`,`user`,`interface`,`event_type`),
+  UNIQUE KEY `uniq_session_key` (`session_key`),
+  KEY `idx_user_time` (`user`,`event_time`),
+  KEY `idx_router_time` (`router_id`,`event_time`),
+  KEY `idx_iface_time` (`interface`,`event_time`),
+  KEY `idx_user_connect` (`user`,`connect_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -544,7 +583,47 @@ CREATE TABLE `vpn_events` (
 
 LOCK TABLES `vpn_events` WRITE;
 /*!40000 ALTER TABLE `vpn_events` DISABLE KEYS */;
+INSERT INTO `vpn_events` VALUES
+(1,'2025-08-18 16:44:44','2025-08-18 16:44:44','down','jere','','*f00003','192.168.122.1','10.10.10.250','10.10.10.1',NULL,'R1Test',NULL),
+(2,'2025-08-18 16:44:45','2025-08-18 16:44:45','up','jere','','*f00003','192.168.122.1','10.10.10.250','10.10.10.1',NULL,'R1Test',NULL);
 /*!40000 ALTER TABLE `vpn_events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vpn_sessions`
+--
+
+DROP TABLE IF EXISTS `vpn_sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vpn_sessions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `session_key` varchar(128) NOT NULL,
+  `user` varchar(128) NOT NULL,
+  `service` varchar(32) NOT NULL,
+  `interface` varchar(64) NOT NULL,
+  `router_id` varchar(64) NOT NULL,
+  `caller_id` varchar(128) DEFAULT NULL,
+  `remote_addr` varchar(64) DEFAULT NULL,
+  `local_addr` varchar(64) DEFAULT NULL,
+  `start_time` timestamp NOT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
+  `duration_sec` int(10) unsigned DEFAULT NULL,
+  `last_event` enum('up','down') NOT NULL DEFAULT 'up',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `session_key` (`session_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vpn_sessions`
+--
+
+LOCK TABLES `vpn_sessions` WRITE;
+/*!40000 ALTER TABLE `vpn_sessions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vpn_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -556,4 +635,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-08-18 11:47:19
+-- Dump completed on 2025-08-18 15:07:30
