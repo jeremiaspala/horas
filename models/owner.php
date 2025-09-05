@@ -45,12 +45,15 @@ class owner
         $sql = "INSERT INTO owners (nombre, apellido, usuario, email, sector, habilitado, created_at, updated_at)
                 VALUES (:nombre, :apellido, :usuario, :email, :sector, :habilitado, NOW(), NOW())";
         $st = $this->pdo->prepare($sql);
+
+        $email = filter_var(trim($data['email'] ?? ''), FILTER_VALIDATE_EMAIL) ?: null;
+
         $st->execute([
-            ':nombre'     => trim($data['nombre'] ?? ''),
-            ':apellido'   => trim($data['apellido'] ?? ''),
-            ':usuario'    => trim($data['usuario'] ?? ''),
-            ':email'      => trim($data['email'] ?? ''),
-            ':sector'     => trim($data['sector'] ?? ''),
+            ':nombre'     => strip_tags(trim($data['nombre'] ?? '')),
+            ':apellido'   => strip_tags(trim($data['apellido'] ?? '')),
+            ':usuario'    => strip_tags(trim($data['usuario'] ?? '')),
+            ':email'      => $email,
+            ':sector'     => strip_tags(trim($data['sector'] ?? '')),
             ':habilitado' => !empty($data['habilitado']) ? 1 : 0,
         ]);
         return (int)$this->pdo->lastInsertId();

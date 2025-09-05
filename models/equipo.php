@@ -39,15 +39,29 @@ class equipo
                 VALUES
                 (:nombre, :tipo, :mac, :sector_id, :owner_id, :descripcion, :vlan_id, :ip, NOW(), NOW())";
         $st = $this->pdo->prepare($sql);
+
+        $nombre = strip_tags(trim($data['eq_nombre'] ?? ''));
+        $tipo   = strip_tags(trim($data['eq_tipo'] ?? ''));
+
+        $mac = strtoupper(trim($data['eq_mac'] ?? ''));
+        if ($mac !== '' && !preg_match('/^([0-9A-F]{2}([:-])){5}[0-9A-F]{2}$/', $mac)) {
+            $mac = '';
+        }
+
+        $ip = trim($data['eq_ip'] ?? '');
+        if ($ip !== '' && filter_var($ip, FILTER_VALIDATE_IP) === false) {
+            $ip = '';
+        }
+
         $st->execute([
-            ':nombre'     => trim($data['eq_nombre'] ?? ''),
-            ':tipo'       => trim($data['eq_tipo'] ?? ''),
-            ':mac'        => strtoupper(trim($data['eq_mac'] ?? '')),
+            ':nombre'     => $nombre,
+            ':tipo'       => $tipo,
+            ':mac'        => $mac,
             ':sector_id'  => (int)($data['eq_sector_id'] ?? 0),
             ':owner_id'   => (int)($data['eq_owner_id'] ?? 0),
-            ':descripcion'=> trim($data['eq_desc'] ?? ''),
+            ':descripcion'=> strip_tags(trim($data['eq_desc'] ?? '')),
             ':vlan_id'    => (int)($data['eq_vlan_id'] ?? 0),
-            ':ip'         => trim($data['eq_ip'] ?? ''),
+            ':ip'         => $ip,
         ]);
         return (int)$this->pdo->lastInsertId();
     }
