@@ -16,7 +16,6 @@ Pensada para equipos pequeños o profesionales que necesitan llevar un control o
 
 ## Datos del autor
 
-- **Nombre:** [Tu Nombre]
-- **Email:** [tu-correo@example.com]
-- **Sitio:** [https://tu-sitio.com](https://tu-sitio.com)
+- **Nombre:** Jeremias Palazzesi
+- **Email:** jeremiaspalazzesi@gmail.com
 
