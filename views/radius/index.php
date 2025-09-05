@@ -133,11 +133,13 @@
           </div>
           <div class="col-md-4">
             <label class="form-label">mac</label>
-            <input name="eq_mac" class="form-control form-control-sm" placeholder="aa:bb:cc:dd:ee:ff">
+            <input name="eq_mac" class="form-control form-control-sm" placeholder="aa:bb:cc:dd:ee:ff"
+                   pattern="^([0-9a-fA-F]{2}[:\-]){5}[0-9a-fA-F]{2}$" title="formato AA:BB:CC:DD:EE:FF">
           </div>
           <div class="col-md-4">
             <label class="form-label">ip (opcional)</label>
-            <input name="eq_ip" class="form-control form-control-sm" placeholder="10.0.0.x">
+            <input name="eq_ip" class="form-control form-control-sm" placeholder="10.0.0.x"
+                   pattern="^((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)$" title="IP v4 válida">
           </div>
           <div class="col-md-4">
             <label class="form-label">vlan</label>
