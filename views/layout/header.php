@@ -249,6 +249,9 @@ $identity = Utils::getIdentity();
                                     <li>
                                         <a href="<?= base_url ?>vpn/index"> Conexiones e Informes </a>
                                     </li>                                    
+                                    <li>
+                                        <a href="<?= base_url ?>radius/index"> Inventario Radius </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="menu single-menu">
