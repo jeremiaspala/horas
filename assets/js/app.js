@@ -58,7 +58,6 @@ var App = function() {
         },
         search: function() {
             $(Selector.searchFull).click(function(event) {
-                // console.log('dfdfdf')
                $(this).parents('.search-animated').find('.search-full').addClass(ToggleClasses.inputFocused);
                $(this).parents('.search-animated').addClass('show-search');
                $(Selector.overlay.search).addClass('show');

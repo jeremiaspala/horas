@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/horas.php';
+require_once 'models/vpnevents.php';
 require_once 'models/personas.php';
 
 class DashboardController {
@@ -8,19 +9,11 @@ class DashboardController {
     public function index() {
         Utils::isIdentity();
         require_once 'views/layout/header.php';
-        if ($identity['rol'] == "admin") {
-            require_once 'views/dashboard/index.php';
-        } else {
-            $p = new Personas();
-            $per = $p->getEmail($identity['email']);
-            foreach ($per as $pe):
-                $persona_id = $pe['id'];
-            endforeach;
-            $cat = new Horas();
-            $categoria = $cat->getAll($persona_id);
-            $sumar = $cat->getSumaNoLiqll($persona_id);
-            require_once 'views/horas/mis.php';
-        }
+        $a = new VpnEvents();
+        $vp = $a->UsuariosConectadosAhora();
+        $tpuh = $a->TopUsuariosMes(4);
+        $la = $a->ListarLast();
+        require_once 'views/dashboard/index.php';
         require_once 'views/layout/footer.php';
     }
 

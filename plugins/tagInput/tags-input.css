@@ -1,9 +1,18 @@
-.tags-input-wrapper{
-    background: transparent;
-    padding: 10px;
-    border-radius: 4px;
-}
-.tags-input-wrapper input{
+/*
+	===============================
+			@Import	Function
+	===============================
+*/
+/*
+	===============================
+			@Import	Mixins
+	===============================
+*/
+.tags-input-wrapper {
+  background: transparent;
+  padding: 10px;
+  border-radius: 4px; }
+  .tags-input-wrapper input {
     width: 150px;
     display: block;
     font-weight: 400;
@@ -17,9 +26,8 @@
     font-size: 15px;
     padding: 8px 10px;
     letter-spacing: 1px;
-    background-color: #f1f2f3;
-}
-.tags-input-wrapper .tag{
+    background-color: #f1f2f3; }
+  .tags-input-wrapper .tag {
     display: inline-block;
     background-color: #1b55e2;
     color: #fff;
@@ -28,10 +36,8 @@
     padding: 4px 3px 3px 7px;
     margin-right: 15px;
     margin-bottom: 7px;
-    box-shadow: 0 5px 15px -2px rgba(43, 80, 237, 0.35);
-}
-.tags-input-wrapper .tag a {
-    margin: 0 7px 3px;
-    display: inline-block;
-    cursor: pointer;
-}
+    box-shadow: 0 5px 15px -2px rgba(43, 80, 237, 0.35); }
+    .tags-input-wrapper .tag a {
+      margin: 0 7px 3px;
+      display: inline-block;
+      cursor: pointer; }

@@ -67,7 +67,7 @@
                                         </td>
                                         <td><?= htmlspecialchars($t->created_at) ?></td>
                                         <td class="text-end">
-                                          <a class="btn btn-xs btn-primary" href="<?=base_url?>apitokens/editar?id=<?= (int)$t->id ?>"><i class="fa fa-edit">Editar</i></a>
+                                          <a class="btn btn-xs btn-primary" href="<?=base_url?>apitokens/editar&id=<?= (int)$t->id ?>"><i class="fa fa-edit">Editar</i></a>
                                           <button class="btn btn-xs btn-warning btn-regen" title="Regenerar token"><i class="fa fa-sync">Regenerar</i></button>
                                           <a class="btn btn-xs btn-danger" onclick="return confirm('¿Eliminar el token seleccionado?')" href="<?=base_url?>apitokens/Eliminar&id=<?= (int)$t->id ?>"><i class="fa fa-trash">Eliminar</i></a>
                                         </td>

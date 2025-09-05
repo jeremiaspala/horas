@@ -1,12 +1,3 @@
-<div class="content-wrapper" data-page="api-tokens-crud">
-  <section class="content-header d-flex justify-content-between align-items-center">
-    <h1 class="page-title mb-0"><?= $token->id ? 'Editar token' : 'Nuevo token' ?></h1>
-    <ol class="breadcrumb mb-0">
-      <li><a href="<?=base_url?>"><i class="fa fa-home"></i> Inicio</a></li>
-      <li><a href="<?=base_url?>apitokens/index">API Tokens</a></li>
-      <li class="active"><?= $token->id ? 'Editar' : 'Nuevo' ?></li>
-    </ol>
-  </section>
 
   <section class="content">
     <div class="box box-primary">

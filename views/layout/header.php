@@ -54,6 +54,19 @@ $identity = Utils::getIdentity();
         <link href="<?= base_url ?>assets/css/elements/infobox.css" rel="stylesheet" type="text/css" />
         <!--  END CUSTOM STYLE FILE  -->
         <link rel="stylesheet" type="text/css" href="<?= base_url ?>plugins/jquery-step/jquery.steps.css">
+            <link href="<?= base_url ?>plugins/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
+            <link href="<?= base_url ?>plugins/fullcalendar/custom-fullcalendar.advance.css" rel="stylesheet" type="text/css" />
+            <link href="<?= base_url ?>plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+            <link href="<?= base_url ?>plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+            <link href="<?= base_url ?>assets/css/forms/theme-checkbox-radio.css" rel="stylesheet" type="text/css" />
+            <!-- END PAGE LEVEL STYLE -->
+            <style>
+                .widget { margin-bottom: 10px; }
+                .widget-content-area { border-radius: 6px; }
+                .daterangepicker.dropdown-menu {
+                    z-index: 1059;
+                }
+            </style>
         <style>
             #formValidate .wizard > .content {
                 min-height: 25em;

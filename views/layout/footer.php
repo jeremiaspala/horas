@@ -162,5 +162,14 @@
         checkall('todoAll', 'todochkbox');
         $('[data-toggle="tooltip"]').tooltip()
     </script>
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="<?=base_url?>plugins/fullcalendar/moment.min.js"></script>
+    <script src="<?=base_url?>plugins/flatpickr/flatpickr.js"></script>
+    <script src="<?=base_url?>plugins/fullcalendar/fullcalendar.min.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    <script src="<?=base_url?>plugins/fullcalendar/custom-fullcalendar.advance.js"></script>
+    <!--  END CUSTOM SCRIPTS FILE  -->
 </body>
 </html>

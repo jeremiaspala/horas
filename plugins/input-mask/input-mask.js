@@ -4,6 +4,8 @@ $(document).ready(function(){
 
     $('#static-mask1').inputmask("99-9999999");  //static mask
     $('#static-mask2').inputmask({mask: "aa-9999"});  //static mask
+
+
     // Dynamic Syntax
 
     $('#dynamic-syntax-1').inputmask("9-a{1,3}9{1,3}"); //mask with dynamic syntax
